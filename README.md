@@ -116,3 +116,5 @@ Since EC2 IP changes after restart, run `./update-ip.sh` each time to auto-fix a
 
 ## Project By
 **Sharad Verma** — TrainWithShubham, DevOps Phase 1 Practical Exam
+
+(This is my first project, so it may not be perfect. I’m continuously learning and improving, and I’m open to any feedback or suggestions.)
