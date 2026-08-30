@@ -15,6 +15,9 @@ Done for: **TrainWithShubham — DevOps Phase 1 Practical Exam**
 ## Original Repo
 [MKPTechnicals/Hospital-Management-System-MERN](https://github.com/MKPTechnicals/Hospital-Management-System-MERN) — not Dockerized originally.
 
+## System Design
+https://tinyurl.com/system-design-1
+
 ## Tech Stack
 | Layer | Tech |
 |---|---|
