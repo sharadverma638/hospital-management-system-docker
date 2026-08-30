@@ -19,7 +19,7 @@ Done for: **TrainWithShubham — DevOps Phase 1 Practical Exam**
 https://tinyurl.com/system-design-1
 
 ## Screenshots & Proof
-[View](docs/)
+[View](docs/) | [PDF](docs/Hospital Management System - Dockerized Deployment on AWS.pdf)
 
 ## Tech Stack
 | Layer | Tech |
