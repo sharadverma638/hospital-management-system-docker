@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Frontend — Hospital Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the **frontend (user interface)** of the Hospital Management System, built with **React** (Create React App) and styled using **Tailwind CSS**.
+
+## Tech Stack
+- React 18
+- React Router DOM — page navigation
+- Tailwind CSS — styling
+- Lucide React — icons
+- Create React App (`react-scripts`) — build tooling
+
+## Folder Structure
+```
+frontend/
+├── public/                # Static assets
+├── src/
+│   ├── components/         # Login, SignUp, Patient, Doctors, Admins pages
+│   ├── App.js
+│   └── index.js
+├── package.json
+├── tailwind.config.js
+├── Dockerfile               # Containerizes this frontend service
+└── .dockerignore
+```
 
 ## Available Scripts
+```json
+"start": "react-scripts start",   // development server
+"build": "react-scripts build",   // production build
+"test": "react-scripts test"
+```
 
-In the project directory, you can run:
+## API Connection (Important Change Made)
+All components originally called the backend using a **hardcoded local address**:
+```js
+fetch('http://localhost:5000/api/login', {...})
+```
+Since this frontend is served as a **static website** (built once, then hosted via Nginx), these calls happen directly from the **user's browser** — not from inside Docker. This means `localhost` and Docker service names (like `backend`) do not work once deployed.
 
-### `npm start`
+**Fix applied:** All hardcoded URLs were updated to use the **AWS EC2 public IP** instead, e.g.:
+```js
+fetch('http://<ec2-public-ip>:5000/api/login', {...})
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+⚠️ Since the EC2 public IP changes every time the instance is stopped and restarted, an automation script (`update-ip.sh`, in the project root) updates these URLs and rebuilds this frontend image automatically after every restart.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Docker Setup
+- **Stage 1:** Uses `node:18-alpine` to install dependencies and run `npm run build`, producing an optimized static build (HTML/CSS/JS).
+- **Stage 2:** Uses `nginx:alpine` to serve only the final built files — no Node.js, no source code, no `node_modules` in the final image.
+- Final image size: **~95.7MB**
+- Container listens on port `80` internally, mapped to port `3000` externally via Docker Compose.
 
-### `npm test`
+## Running Standalone (Without Docker)
+```bash
+npm install
+npm start
+```
+Runs on `http://localhost:3000` (development mode only — for production, use the Docker build).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Pages / Components
+- `Login.js` — Login for Admin, Doctor, Patient
+- `SignUp.js` — Patient registration
+- `Patient.js` — Patient dashboard (appointments, prescriptions, care team)
+- `Doctors.js` — Doctor dashboard (patients, appointments, prescriptions)
+- `Admins.js` — Admin dashboard
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Notes
+- This is a pure static frontend — it has no server-side logic of its own; all data operations happen via API calls to the backend.
+- Port `3000` is exposed publicly, since this is the entry point users access via browser.
