@@ -6,6 +6,7 @@ This folder contains all supporting proof and documentation for the Docker + AWS
 
 | File | What It Shows |
 |---|---|
+| `Hospital Management System - Dockerized Deployment on AWS.pdf` | Documentation of the project done. |
 | `System Design.png` | Full system design diagram — shows the 3-tier architecture (frontend, backend, database), Docker network, exposed vs internal ports, and data persistence setup. |
 | `EC2 Instance.png` | AWS EC2 instance running (Ubuntu, Free Tier) — proof of cloud deployment. |
 | `Inbound Rules.png` | AWS Security Group inbound rules — confirms only ports 22 (SSH), 3000 (frontend), and 5000 (backend) are open, while MongoDB's port 27017 stays closed. |
