@@ -18,6 +18,8 @@ Done for: **TrainWithShubham — DevOps Phase 1 Practical Exam**
 ## System Design
 https://tinyurl.com/system-design-1
 
+[View all screenshots and proof](docs/)
+
 ## Tech Stack
 | Layer | Tech |
 |---|---|
