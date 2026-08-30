@@ -1,0 +1,40 @@
+services:
+  mongo:
+    image: mongo:6
+    container_name: hospital-mongo
+    networks:
+      - hospital-net
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: hospital-backend
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/hospital
+    ports:
+      - "5000:5000"
+    networks:
+      - hospital-net
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: hospital-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    networks:
+      - hospital-net
+    restart: unless-stopped
+
+networks:
+  hospital-net:
+    driver: bridge
+
+volumes:
+  mongo-data:
