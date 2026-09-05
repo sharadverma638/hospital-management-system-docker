@@ -17,6 +17,7 @@ This folder contains all supporting proof and documentation for the Docker + AWS
 | `App (patient).png` | Application running in browser — Patient login/dashboard view. |
 | `Database (Running).png` | MongoDB container running with data present — used as the "before" proof for the persistence test. |
 | `Database (Stopped).png` | MongoDB container stopped/removed — used as the "during" proof for the persistence test, showing the container was actually destroyed. |
+> `phase1-mcq-exam-result.png` → Phase 1 MCQ Exam Result (conducted on 5th September 2026)
 
 ## Persistence Test Proof
 `Database (Running).png` and `Database (Stopped).png` together prove that:
