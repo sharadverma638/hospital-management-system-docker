@@ -3,7 +3,7 @@
 ## Project Summary
 An existing open-source 3-tier Hospital Management System (MERN stack) was containerized using Docker, connected with Docker Compose, and deployed on an AWS EC2 instance. The original app had no Docker setup — this project adds it, without changing app functionality.
 
-Done for: **TrainWithShubham — DevOps Phase 1 Practical Exam**
+Done for: **TrainWithShubham — DevOps Phase 1 Practical Exam (30th August 2026)**
 
 ## Objective
 - Take an existing 3-tier app and deploy it using real DevOps practices.
