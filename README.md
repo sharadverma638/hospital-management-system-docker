@@ -21,6 +21,13 @@ https://tinyurl.com/system-design-1
 ## Screenshots & Proof
 [View](docs/)
 
+## Docker Hub
+Images: https://hub.docker.com/r/sharadverma638/hospital-management-system-docker
+
+    docker pull sharadverma638/hospital-management-system-docker:backend
+    docker pull sharadverma638/hospital-management-system-docker:frontend
+    docker pull sharadverma638/hospital-management-system-docker:mongo
+
 ## Tech Stack
 | Layer | Tech |
 |---|---|
